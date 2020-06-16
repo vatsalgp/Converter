@@ -24,7 +24,7 @@ public class Converter {
 
     private static void print() {
         final String[] parts = dest.string.toString().split("\\.");
-        System.out.print(parts[0]);
+        System.out.print("is " + parts[0]);
         if (parts.length > 1) {
             StringBuilder fraction = new StringBuilder(parts[1]);
             while (fraction.length() > 0 && fraction.charAt(fraction.length() - 1) == '0')
@@ -36,8 +36,16 @@ public class Converter {
     }
 
     private static void getInput() {
+        System.out.println("Base Converter Example: ");
+        System.out.println("Base 16 ff to Base 10");
         final Scanner scanner = new Scanner(System.in);
-        strings = new String[] { scanner.nextLine(), scanner.nextLine(), scanner.nextLine() };
+        scanner.next();
+        String str1 = scanner.next();
+        String str2 = scanner.next();
+        scanner.next();
+        scanner.next();
+        String str3 = scanner.next();
+        strings = new String[] { str1, str2, str3 };
         scanner.close();
     }
 
