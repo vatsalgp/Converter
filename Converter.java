@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
 public class Converter {
-    private static double number;
+    private static StringBuilder sourceString = new StringBuilder();
+    private static StringBuilder destString = new StringBuilder();
     private static int sourceRadix;
     private static int destRadix;
 
@@ -15,24 +16,24 @@ public class Converter {
     }
 
     private static void printOutput() {
-        final StringBuilder out = new StringBuilder();
-        int integer = (int) number;
+        int integer = (int) Double.parseDouble(sourceString.toString());
         if (destRadix == 1)
             for (int i = 0; i < integer; i++)
-                out.append("1");
+                destString.append("1");
         else if (destRadix == 10)
-            out.append(Double.toString(number));
+            destString.append((sourceString));
         else {
-            out.append(Integer.toString(integer, destRadix)).append(".");
+            destString.append(Integer.toString(integer, destRadix)).append(".");
+            double number = Double.parseDouble(sourceString.toString());
             number -= integer;
             for (int i = 0; i < 5; i++) {
                 number *= destRadix;
                 integer = (int) number;
                 number -= integer;
-                out.append(Integer.toString(integer, destRadix));
+                destString.append(Integer.toString(integer, destRadix));
             }
         }
-        System.out.println(out);
+        System.out.println(destString);
     }
 
     private static void getInput() throws Exception {
@@ -45,14 +46,14 @@ public class Converter {
         destRadix = getRadix(third);
         switch (sourceRadix) {
             case 1:
-                number = second.trim().length();
+                sourceString.append(Integer.toString(second.trim().length()));
                 break;
             case 10:
-                number = Double.parseDouble(second);
+                sourceString.append(second);
                 break;
             default:
                 final String[] parts = second.split("\\.");
-                number = Integer.parseInt(parts[0], sourceRadix);
+                double number = Integer.parseInt(parts[0], sourceRadix);
                 if (parts.length > 1) {
                     int count = 1;
                     for (final String ch : parts[1].split("")) {
@@ -61,6 +62,7 @@ public class Converter {
                         count++;
                     }
                 }
+                sourceString.append(Double.toString(number));
         }
     }
 
