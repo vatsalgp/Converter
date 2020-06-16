@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class Converter {
     final private static Scanner scanner = new Scanner(System.in);
     private static double num;
     private static int radix;
