@@ -16,10 +16,23 @@ public class Converter {
             parseInput();
             inputToBase10();
             base10ToDest();
-            System.out.println(dest.string);
+            print();
         } catch (final Exception e) {
             System.out.println("Error: Incorrect values");
         }
+    }
+
+    private static void print() {
+        final String[] parts = dest.string.toString().split("\\.");
+        System.out.print(parts[0]);
+        if (parts.length > 1) {
+            StringBuilder fraction = new StringBuilder(parts[1]);
+            while (fraction.length() > 0 && fraction.charAt(fraction.length() - 1) == '0')
+                fraction.deleteCharAt(fraction.length() - 1);
+            if (fraction.length() > 0)
+                System.out.print("." + fraction);
+        }
+        System.out.println();
     }
 
     private static void getInput() {
