@@ -1,3 +1,5 @@
+package converter;
+
 import java.util.Scanner;
 
 public class Converter {
